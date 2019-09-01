@@ -1,4 +1,6 @@
 import { start } from '@storybook/core/client';
+import addons from '@storybook/addons';
+import Events from '@storybook/core-events';
 import Vue from 'vue';
 
 import './globals';
@@ -70,7 +72,13 @@ function decorateStory(getStory, decorators) {
   );
 }
 
-const { clientApi, configApi, forceReRender } = start(render, { decorateStory });
+const { context, clientApi, configApi, forceReRender } = start(render, { decorateStory });
+
+const { storyStore } = context;
+
+addons.getChannel().on('story_force_render', () => {
+  storyStore.emit(Events.STORY_RENDER);
+});
 
 export const {
   storiesOf,
