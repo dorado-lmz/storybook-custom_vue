@@ -1,6 +1,6 @@
 {
   "name": "storybook_custom_vue",
-  "version": "5.1.11",
+  "version": "5.1.12",
   "description": "Storybook for Vue: Develop Vue Component in isolation with Hot Reloading.",
   "keywords": [
     "storybook"
@@ -23,7 +23,7 @@
     "storybook-server": "./bin/index.js"
   },
   "scripts": {
-    "prepare": "node ../../scripts/prepare.js"
+    "prepare": "node ../build/prepare.js"
   },
   "dependencies": {
     "@storybook/addons": "^5.1.11",

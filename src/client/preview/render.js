@@ -4,7 +4,7 @@ import Vue from 'vue';
 export const COMPONENT = 'STORYBOOK_COMPONENT';
 export const VALUES = 'STORYBOOK_VALUES';
 
-const root = new Vue({
+var rootFun = () => new Vue({
   data() {
     return {
       [COMPONENT]: undefined,
@@ -16,7 +16,7 @@ const root = new Vue({
     return h('div', { attrs: { id: 'root' } }, children);
   },
 });
-
+var root = rootFun();
 export default function render({
   storyFn,
   selectedKind,
@@ -42,9 +42,9 @@ export default function render({
   }
 
   showMain();
-
-  // at component creation || refresh by HMR
-  if (!root[COMPONENT] || !forceRender) {
+  if (root && root[VALUES].groupId !== element.options[VALUES].groupId) {
+    root.$destroy();
+    root =  rootFun();
     root[COMPONENT] = element;
   }
 
@@ -52,5 +52,7 @@ export default function render({
 
   if (!root.$el) {
     root.$mount('#root');
+  } else {
+    root.$forceUpdate();
   }
 }
