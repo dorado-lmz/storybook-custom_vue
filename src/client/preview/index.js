@@ -74,12 +74,6 @@ function decorateStory(getStory, decorators) {
 
 const { context, clientApi, configApi, forceReRender } = start(render, { decorateStory });
 
-const { storyStore } = context;
-
-addons.getChannel().on('story_force_render', () => {
-  storyStore.emit(Events.STORY_RENDER);
-});
-
 export const {
   storiesOf,
   setAddon,

@@ -42,7 +42,7 @@ export default function render({
   }
 
   showMain();
-  if (root && root[VALUES].groupId !== element.options[VALUES].groupId) {
+  if (!forceRender || root && root[VALUES].groupId !== element.options[VALUES].groupId || element.options[VALUES]._forceUpdate) {
     root.$destroy();
     root =  rootFun();
     root[COMPONENT] = element;
